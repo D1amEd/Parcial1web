@@ -1,16 +1,3 @@
 {
-    "banner": "Encuentra hasta el libro que no estabas buscando",
-    "title": "Tu Libreria Aliada",
-    "usernamePH": "Usuario o correo",
-    "passwordPH": "Contraseña",
-    "forgotPH": "Olvidé mi contraseña",
-    "signinPH": "Iniciar Sesión",
-    "error": "Error al iniciar sesión",
-    "author": "Autor",
-    "publisher": "Publicador",
-    "gender": "Genero",
-    "year": "Año",
-    "available": "Disponible en línea",
-    "price": "Precio",
-    "summary": "Resumen"
+   
 }

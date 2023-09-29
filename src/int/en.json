@@ -1,16 +1,3 @@
 {
-    "banner": "Find the book that you were not even searching for",
-    "title": "Your Allied Library",
-    "usernamePH": "Users name or email",
-    "passwordPH": "Password",
-    "forgotPH": "Forgot password",
-    "signinPH": "Sign In",
-    "error": "Error when trying to sign in",
-    "author": "Author",
-    "publisher": "Publisher",
-    "gender": "Gender",
-    "year": "Year",
-    "available": "Available Online",
-    "price": "Price",
-    "summary": "Summary"
+  
 }

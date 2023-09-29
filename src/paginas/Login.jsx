@@ -1,37 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-// import books from "../imgs/books.png"; 
+ import cafe from "../imgs/cafe.svg"; 
+ import TableComponent from "./TableComponent";
 import axios from "../api";
 
 export default function Login() {
+
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [response, setResponse] = useState({
+      msg: "",
+      status: "idle",
+    });
+  
 
     const handleLogin = async () => {
-        if (password.length < 8) {
-            alert("Password must be at least 8 characters long");
-            return;
-        }
         const data = {
             "email": username,
             "password": password,
         }
-        const config = {
-            headers:{
-                "Content-Type": "application/json",
-                "X-API-Key": "b3b6c5f0"
-            }
-          };
         try {
-            const response = await axios.post("/login", data, config);
-            localStorage.setItem("rol", response.data.rol);
+            const response = await axios.post("/login", data);
             navigate("/home");
             console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (err) {
+          setResponse({
+            msg: <FormattedMessage id="error" />,
+            status: "error",
+          });  } 
     }
     // setUsername("ahc@hotmail.com");
     // setPassword("1234567834");
@@ -39,64 +37,74 @@ export default function Login() {
 
    
     return (
-    <div className="bg-neutral-600/70 flex justify-center items-center w-screen h-screen">
-      <div className="flex w-[750px] h-[550px] bg-white">
-        {/* imagen */}
-        <div className="flex flex-col justify-evenly items-center w-1/2 h-full p-6 bg-[#B7CCC2]">
-       
-
-          {/* texto */}
-          <h1 className="text-2xl text-white font-semibold text-center">
-            <FormattedMessage id="banner" />
-          </h1>
+    <div className="">
+      <div className="flex flex-col w-screen h-screen bg-white items-center">
+        {/* image */}
+        <div className="w-">
+          <h1 className="">El aroma mágico</h1>
+        <img src={cafe} alt="cafe" className="h-[250px]" />
         </div>
 
-        {/* login */}oo
-        <div className="flex flex-col justify-evenly items-center gap-y-5 w-1/2 h-full px-16 py-8">
+        
+      
+        {/* login */}
+        <div className="flex flex-col justify-evenly items-center w-96">
           {/* titulo */}
-          <h1 className="text-4xl text-center text-black font-medium leading-[50px] capitalize">
-            <FormattedMessage id="title" />
-          </h1>
+        <h1 className="mr-1000">Inicio de sesión</h1>
+          
 
-          <div className="flex flex-col gap-y-8 justify-start w-full">
+          <div className=" border border-black bg-[#F9F1F1] flex flex-col gap-y-8 justify-start w-full">
             {/* input email */}
             <div className="flex flex-col justify-start w-full">
-              <label htmlFor="email" className="text-neutral-400 text-sm">
-                <FormattedMessage id="usernamePH" />
+              <label htmlFor="email" className="">
+                <FormattedMessage id="Email" />
               </label>
               <input
                 id="email"
                 type="email"
-                className="border-b-[1px] border-neutral-400 p-2"
+                className="bg-[#D9D9D9]"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
             {/* input password */}
             <div className="flex flex-col justify-start w-full">
-              <label htmlFor="password" className="text-neutral-400 text-sm">
-                <FormattedMessage id="passwordPH" />
+              <label htmlFor="password" className="">
+                <FormattedMessage id="Password" />
               </label>
               <input
                 id="password"
                 type="password"
-                className="border-b-[1px] border-neutral-400 mb-2 p-2"
+                className="bg-[#D9D9D9]"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {/* forgot */}
-              <p className="text-right text-xs text-neutral-400">
-                <FormattedMessage id="forgotPH" />
-              </p>
             </div>
 
+            
+
             {/* button */}
+
+           
             <div className="flex flex-col gap-y-2">
+            <div className="flex justify-evenly">
               <button
-                className="bg-neutral-600 hover:bg-neutral-700 text-white rounded-xl p-2"
+                className="bg-[#8FA98F] text-black w-253 h-53"
                 onClick={handleLogin}
               >
-                <FormattedMessage id="signinPH" />
+                <FormattedMessage id="SignIn" />
               </button>
+              <button
+                className="bg-[#E75D5D] text-black w-253 h-53"
+                onClick={handleLogin}
+              >
+                <FormattedMessage id="Cancel" />
+              </button>
+              </div>
+  
+              {/* error */}
+              {response.status === "error" && (
+                <p className="text-red-500">{response.msg}</p>
+              )}
 
             </div>
           </div>
