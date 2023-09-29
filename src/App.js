@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { IntlProvider } from "react-intl";
+import localeEs from "./int/es.json";
+import localeEn from "./int/en.json";
+import Login from "./paginas/Login";
+import Home from "./paginas/HomePage";
 function App() {
+  const [locale, setLocale] = useState(navigator.language);
+  const [localeMsgs, setLocaleMsgs] = useState({});
+
+  useEffect(() => {
+    if (locale === "en") setLocaleMsgs(localeEn);
+    else setLocaleMsgs(localeEs);
+  }, [locale]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <IntlProvider locale={locale} messages={localeMsgs}>
+      <Router>
+        <Routes>
+          <Route exact index element={<Login/>} />
+          <Route exact path="/home" element={<Home/>} />
+        </Routes>
+      </Router>
+    </IntlProvider>
   );
 }
 
