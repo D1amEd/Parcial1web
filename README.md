@@ -7,14 +7,13 @@ En el archivo README.md de ese repositorio se encuentra el proceso de instalaci�
 
 ## Correr react
 1. Descargar el zip o clonar el proyecto de github
-###Instalación
-
+2. Entrar al archivo y correr npm i
 ```sh
 cd Parcial2Web
 npm i
 ```
-Una vez se entre, correr react con 
+3. Una vez se entre, correr react con 
 ```sh
 npm start
 ```
-El front debería correr en http://localhost:3000
+El front debería correr en [http://localhost:3000](http://localhost:3000)
