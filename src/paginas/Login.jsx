@@ -1,113 +1,106 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
- import cafe from "../imgs/cafe.svg"; 
- import TableComponent from "./TableComponent";
+import Header from "../components/Header";
 import axios from "../api";
+import Contact from "../components/Contact";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [response, setResponse] = useState({
+    status: "idle",
+  });
 
-    const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [response, setResponse] = useState({
-      msg: "",
-      status: "idle",
-    });
-  
-
-    const handleLogin = async () => {
-        const data = {
-            "email": username,
-            "password": password,
-        }
-        try {
-            const response = await axios.post("/login", data);
-            navigate("/home");
-            console.log(response);
-        } catch (err) {
-          setResponse({
-            msg: <FormattedMessage id="error" />,
-            status: "error",
-          });  } 
+  const handleLogin = async () => {
+    const data = {
+      login: username,
+      password,
+    };
+    try {
+      const response = await axios.post("/login", data);
+      setResponse({
+        status: "idle",
+      });
+      navigate("/home");
+    } catch (err) {
+      setResponse({
+        status: "error",
+      });
     }
-    // setUsername("ahc@hotmail.com");
-    // setPassword("1234567834");
-    // handleLogin();
+  };
+  return (
+    <div className="flex flex-col p-8 w-screen h-screen bg-white items-center">
+      {/* image */}
+      <Header />
 
-   
-    return (
-    <div className="">
-      <div className="flex flex-col w-screen h-screen bg-white items-center">
-        {/* image */}
-        <div className="w-">
-          <h1 className="">El aroma mágico</h1>
-        <img src={cafe} alt="cafe" className="h-[250px]" />
-        </div>
+      <br />
 
-        
-      
-        {/* login */}
-        <div className="flex flex-col justify-evenly items-center w-96">
+      {/* login */}
+      <div className="flex justify-center items-center w-full">
+        <div className="flex flex-col w-[500px]">
           {/* titulo */}
-        <h1 className="mr-1000">Inicio de sesión</h1>
-          
+          <h1 className="text-lg font-semibold">
+            <FormattedMessage id="LoginTitle" />
+          </h1>
 
-          <div className=" border border-black bg-[#F9F1F1] flex flex-col gap-y-8 justify-start w-full">
+          <div className="border border-black bg-[#F9F1F1] flex flex-col gap-y-5 justify-start w-full px-28 py-4 mb-12">
             {/* input email */}
             <div className="flex flex-col justify-start w-full">
-              <label htmlFor="email" className="">
+              <label htmlFor="username" className="text-base font-bold">
                 <FormattedMessage id="Email" />
               </label>
               <input
-                id="email"
-                type="email"
-                className="bg-[#D9D9D9]"
+                id="username"
+                type="text"
+                value={username}
+                className="bg-[#D9D9D9] h-10 p-1"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
             {/* input password */}
             <div className="flex flex-col justify-start w-full">
-              <label htmlFor="password" className="">
+              <label htmlFor="password" className="text-base font-bold">
                 <FormattedMessage id="Password" />
               </label>
               <input
                 id="password"
                 type="password"
-                className="bg-[#D9D9D9]"
+                value={password}
+                className="bg-[#D9D9D9] h-10 p-1"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            
-
             {/* button */}
-
-           
-            <div className="flex flex-col gap-y-2">
-            <div className="flex justify-evenly">
+            <div className="flex justify-between items-center gap-x-8">
               <button
-                className="bg-[#8FA98F] text-black w-253 h-53"
+                type="submit"
+                className="bg-[#8FA98F] hover:bg-[#778f77] text-black font-bold px-2 py-1 w-1/2"
                 onClick={handleLogin}
               >
                 <FormattedMessage id="SignIn" />
               </button>
               <button
-                className="bg-[#E75D5D] text-black w-253 h-53"
-                onClick={handleLogin}
+                className="bg-[#E75D5D] hover:bg-red-600 text-black font-bold w-1/2 px-2 py-1"
+                onClick={() => {
+                  setUsername("");
+                  setPassword("");
+                }}
               >
                 <FormattedMessage id="Cancel" />
               </button>
-              </div>
-  
-              {/* error */}
-              {response.status === "error" && (
-                <p className="text-red-500">{response.msg}</p>
-              )}
-
             </div>
+            {/* error */}
+            {response.status === "error" && (
+              <p className="text-red-500 text-sm font-semibold">
+                <FormattedMessage id="Error" />
+              </p>
+            )}
           </div>
+          <Contact />
         </div>
       </div>
     </div>

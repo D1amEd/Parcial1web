@@ -6,7 +6,8 @@ import localeEn from "./int/en.json";
 import Login from "./paginas/Login";
 import Home from "./paginas/HomePage";
 function App() {
-  const [locale, setLocale] = useState(navigator.language);
+  const language= "en"
+  const [locale, setLocale] = useState(language);
   const [localeMsgs, setLocaleMsgs] = useState({});
 
   useEffect(() => {
@@ -19,7 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact index element={<Login/>} />
-          <Route exact path="/home" element={<Home/>} />
+          <Route exact path="/home" element={<Home language={language}/>} />
         </Routes>
       </Router>
     </IntlProvider>

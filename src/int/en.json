@@ -1,3 +1,15 @@
 {
-  
-}
+    "LoginTitle": "Signin",
+    "Email": "Username",
+    "Password": "Password",
+    "SignIn": "Signin",
+    "Cancel": "Cancel",
+    "Error": "Authentication error. Check credentials.",
+    "Contact": "Contact us: +57 3102105253 - info@elaromamagico.com - @elaromamagico",
+    "CName": "Name",
+    "CType": "Type",
+    "CRegion": "Region",
+    "CCultTxt": "Grown at a height of",
+    "Notes": "Notes",
+    "MASL": "MASL"
+ }
