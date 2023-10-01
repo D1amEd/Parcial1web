@@ -1,6 +1,5 @@
 # Parcial1web
 ### Esteban Rico Moreno - 201921156.
-Escribi mal el nombre del repo, es parcial 1.
 
 ## Prerrequisito: instalar el back con el siguiente [Enlace]([https://nodejs.org/](https://github.com/isis3710-uniandes/202320_Parcial1_Back)) 
 En el archivo README.md de ese repositorio se encuentra el proceso de instalación, ejecución y el detalle de cada endpoint
